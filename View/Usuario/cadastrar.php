@@ -22,8 +22,8 @@
 
 <?php
 
-require_once "C:/turma1/xampp/htdocs/projetinhogym/Controller/UsuarioController.php";
-require_once "C:/turma1/xampp/htdocs/projetinhogym/DB/DataBase.php";
+require_once "C:/xampp/htdocs/projetinhogym/Controller/UsuarioController.php";
+require_once "C:/xampp/htdocs/projetinhogym/DB/DataBase.php";
 
 $UsuarioController = new UsuarioController($pdo);
 

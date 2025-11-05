@@ -1,5 +1,5 @@
 <?php
-require_once "C:/turma1/xampp/htdocs/projetinhogym/Model/UsuarioModel.php";
+require_once "C:/xampp/htdocs/projetinhogym/Model/UsuarioModel.php";
 
 class UsuarioController {
     private $usuarioModel;
@@ -10,7 +10,7 @@ class UsuarioController {
 
     public function listar() {
         $usuarios = $this->usuarioModel->buscarTodos();
-        include_once "C:/turma1/xampp/htdocs/projetinhogym/View/Usuario/listar.php";
+        include_once "C:/xampp/htdocs/projetinhogym/View/Usuario/listar.php";
         return $usuarios;
     }
      public function buscarUsuario($id) {
@@ -23,9 +23,20 @@ return $this-> usuarioModel->cadastrar($nome, $email, $senha);
 
 
     }
-    public function login(){
-        
+  public function login($email, $senha){
+    $resultado = $this->usuarioModel->login($email, $senha);
+
+    if ($resultado) {
+        // Login OK
+        header("Location: ../../index.php");
+        exit();
+    } else {
+        // Login ERRADO
+        echo "<script>alert('E-mail ou senha incorretos!'); window.location.href='login.php';</script>";
+        exit();
     }
+}
+
    public function editar($nome,$email, $senha,$id){
  $this-> usuarioModel->editar($nome,$email, $senha, $id);
 

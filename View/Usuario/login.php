@@ -1,6 +1,20 @@
 <?php
-require_once '../projetinhogym/db/Database.php'
 
+require_once "C:/xampp/htdocs/projetinhogym/Controller/UsuarioController.php";
+require_once "C:/xampp/htdocs/projetinhogym/DB/DataBase.php";
+
+$UsuarioController = new UsuarioController($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    $UsuarioController->login($email, $senha);
+
+    header("Location: ../../index.php");
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -11,15 +25,18 @@ require_once '../projetinhogym/db/Database.php'
     <title>Login</title>
 </head>
 <body>
+
 <form method="post">
 
-<label for="email">E-mail:</label>
-<input type="mail" name="email" required>
-<label for="senha">Senha:</label>
-<input type="text" name="senha" required>
+    <label for="email">E-mail:</label>
+    <input type="email" name="email" required>
+
+    <label for="senha">Senha:</label>
+    <input type="password" name="senha" required>
+
+    <button type="submit">Entrar</button>
 
 </form>    
-
 
 </body>
 </html>

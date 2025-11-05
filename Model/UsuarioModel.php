@@ -21,7 +21,7 @@ class UsuarioModel {
 
 
     public function cadastrar($nome,$email,$senha){
-$sql = "INSERT INTO users (nome, descricao, quantidade, codigobarra, preco,nomepaga,tipo) VALUES (:nome, :descricao, :quantidade, :codigobarra, :preco,:nomepaga,:tipo)";
+$sql = "INSERT INTO users (nome, email, senha) VALUES (:nome, :email, :senha)";
 $stmt = $this->pdo->prepare($sql);
      $stmt->execute([
     ':nome' => $nome,
@@ -31,14 +31,29 @@ $stmt = $this->pdo->prepare($sql);
 
 
     }
-public function login($email,$senha,$id){
 
-       $stmt = $this->pdo->query("SELECT * FROM users WHERE email = $email");
-        return $stmt->fetch  (PDO::FETCH_ASSOC);
-    if($email && $senha === $_SESSION['email'] && $_SESSION['senha']){
-header('location:cadastrar.php');
+    public function login($email, $senha) {
+        session_start();
+
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$email]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // usuário não encontrado:
+        if (!$usuario){ return false;
+        }
+
+        // senha está batendo (sem criptografia por enquanto):
+        if ($senha === $usuario['senha']) {
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['nome'] = $usuario['nome'];
+            $_SESSION['email'] = $usuario['email'];
+            return true;
+        }
+
+        return false;
     }
-}
 
    public function editar($nome,$email,$senha,$id){
 $sql = "UPDATE users SET nome=?, email=?, senha=? WHERE id=?";

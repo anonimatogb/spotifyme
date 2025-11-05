@@ -11,13 +11,9 @@
     echo "<tr>
         <th>ID</th>
         <th>Nome</th>
-        <th>Descrição</th>
-        <th>Quantidade</th>
-        <th>Código de Barras</th>
-        <th>Preço</th>
-        <th>Nome Pagamento</th>
-        <th>Tipo</th>
-        <th>Ações</th>
+        <th>E-mail</th>
+        <th>Senha</th>
+ 
       </tr>";
 
 foreach ($usuarios as $usuario) {
@@ -25,12 +21,9 @@ foreach ($usuarios as $usuario) {
       echo "<tr>";
       echo "<td>{$id}</td>";
       echo "<td>{$usuario['nome']}</td>";
-      echo "<td>{$usuario['descricao']}</td>";
-      echo "<td>{$usuario['quantidade']}</td>";
-      echo "<td>{$usuario['codigobarra']}</td>";
-      echo "<td>{$usuario['preco']}</td>";
-      echo "<td>{$usuario['nomepaga']}</td>";
-      echo "<td>{$usuario['tipo']}</td>";
+      echo "<td>{$usuario['email']}</td>";
+      echo "<td>{$usuario['senha']}</td>";
+
       echo "<td>
 <a href='View/Usuario/editar.php?id={$id}'>Editar</a> 
 <a href='View/Usuario/deletar.php?id={$id}' onclick=\"return confirm('Tem certeza que deseja excluir este produto?')\">Deletar</a></td>";
