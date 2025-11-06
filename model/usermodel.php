@@ -22,7 +22,7 @@ class usermodel{
                 ':email'=> $email,
                 ':senha'=> $senha,
             ]);
-            return $this ->pdo->lastuserid();
+            return $this ->pdo->LastInsertId();
         }catch(PDOException $e){
     if ($e->getCode() == 23000 && strpos($e->getMessage(), 'Duplicate entry') !== false) {
         throw new Exception("E-mail já cadastrado!");
